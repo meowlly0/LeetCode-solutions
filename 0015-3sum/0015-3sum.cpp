@@ -11,7 +11,7 @@ public:
             } else{ return {};}
         }
 
-        set<vector <int>> triplets; 
+        vector<vector <int>> triplets; 
         sort(nums.begin(), nums.end() );
 
         for ( int i = 0; i< size -2; ++i){
@@ -23,9 +23,11 @@ public:
                     int sum = nums[i] + nums[left] + nums[right];
                     if( sum == 0){
                         // insert items
-                        triplets.insert ({nums[i], nums[left], nums[right]});
+                        triplets.push_back({nums[i], nums[left], nums[right]});
                         right --;
                         left++;
+                        while(left<right && nums[left]==nums[left-1]) left++;
+
                     }
                     else if (sum > 0){ 
                         right --;
@@ -38,6 +40,7 @@ public:
 
         }
         
-    return vector<vector<int>> (triplets.begin(), triplets.end());
+    return triplets;
+     //vector<vector<int>> (triplets.begin(), triplets.end());
     }
 };
